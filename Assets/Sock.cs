@@ -17,7 +17,8 @@ public class Sock : MonoBehaviour
     public GameObject new_car_prefab;
 
     public CinemachineTargetGroup camera_targets;
-    
+
+    public static Socket socket;
 
     Vehicle my_vechicle;
     public Base tower;
@@ -35,39 +36,39 @@ public class Sock : MonoBehaviour
         {
             try
             {
-            // Create a new socket instance
-            Socket socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.IP);
+                // Create a new socket instance
+                socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.IP);
 
-            // Define the IPC socket path
-            string socketPath = "sock";
-            Debug.Log("IPC socket file specified");
+                // Define the IPC socket path
+                string socketPath = "sock";
+                Debug.Log("IPC socket file specified");
 
-            // check file access possibility :)
-            // FileInfo file = new System.IO.FileInfo(socketPath);
-            // long fileSize = file.Length;
-            // Debug.Log("filesize : " + fileSize);
+                // check file access possibility :)
+                // FileInfo file = new System.IO.FileInfo(socketPath);
+                // long fileSize = file.Length;
+                // Debug.Log("filesize : " + fileSize);
 
-            // Connect to the IPC socket
-            socket.Connect(new UnixDomainSocketEndPoint(socketPath));
-            Debug.Log("IPC socket connected");
+                // Connect to the IPC socket
+                socket.Connect(new UnixDomainSocketEndPoint(socketPath));
+                Debug.Log("IPC socket connected");
 
-            // Send data to the server
-            // string message = "Hello from C# client";
-            // byte[] data = Encoding.ASCII.GetBytes(message);
-            // socket.Send(data);
+                // Send data to the server
+                // string message = "Hello from C# client";
+                // byte[] data = Encoding.ASCII.GetBytes(message);
+                // socket.Send(data);
 
-            while (true)
-            {
-                // Receive a response from the server
-                byte[] buffer = new byte[1024];
-                int bytesRead = socket.Receive(buffer);
-                string response = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                Debug.Log("Received message from server: " + response);
-                level1_decoder(response);
-            }
+                while (true)
+                {
+                    // Receive a response from the server
+                    byte[] buffer = new byte[1024];
+                    int bytesRead = socket.Receive(buffer);
+                    string response = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+                    Debug.Log("Received message from server: " + response);
+                    level1_decoder(response);
+                }
 
-            // Close the socket
-            socket.Close();
+                // Close the socket
+                socket.Close();
             }
             catch (Exception e)
             {
@@ -88,16 +89,19 @@ public class Sock : MonoBehaviour
         thread.Start();
         Debug.Log("Sock thread started");
 
-        #if UNITY_EDITOR
-        UnityEditor.EditorApplication.playmodeStateChanged = delegate () {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.playmodeStateChanged = delegate ()
+        {
             if (!UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode &&
-                UnityEditor.EditorApplication.isPlaying) {
-                if(thread!=null){
+                UnityEditor.EditorApplication.isPlaying)
+            {
+                if (thread != null)
+                {
                     thread.Abort();
                 }
-                Debug.Log (string.Format("[{0}] Exiting playmode.",GetType().Name));
+                Debug.Log(string.Format("[{0}] Exiting playmode.", GetType().Name));
             }
-        #endif
+#endif
         };
 
     }
@@ -108,7 +112,7 @@ public class Sock : MonoBehaviour
         {
             // do something with entry.Value or entry.Key
             Debug.Log("entry #> " + entry.Key + " : " + entry.Value);
-            if(entry.Value is null)
+            if (entry.Value is null)
             {
                 GameObject go = Instantiate(new_car_prefab, new Vector3(0, 0, 0), Quaternion.identity);
                 mac_vehicle_mapper[entry.Key] = go.GetComponent<Vehicle>();
@@ -125,14 +129,16 @@ public class Sock : MonoBehaviour
         thread.Abort();
     }
 
-    void quit(){
+    void quit()
+    {
 
     }
 
     void level1_decoder(string buffer)
     {
         Debug.Log("level1_decoder started: (" + buffer + ")");
-        if(buffer.Length == 0){
+        if (buffer.Length == 0)
+        {
             return;
         }
         string macAddr = buffer.Substring(0, 12);
@@ -155,7 +161,7 @@ public class Sock : MonoBehaviour
                 break;
 
             case 'h':
-
+                heading_decoder(macAddr, payload);
                 break;
 
             default:
@@ -173,7 +179,8 @@ public class Sock : MonoBehaviour
             my_vechicle.lat = float.Parse(payload.Split(',')[0]);
             my_vechicle.lon = float.Parse(payload.Split(',')[1]);
         }
-        else if(macAddr == "basebasebase"){
+        else if (macAddr == "basebasebase")
+        {
             tower.base_station_lat = float.Parse(payload.Split(',')[0]);
             tower.base_station_lon = float.Parse(payload.Split(',')[1]);
         }
@@ -182,12 +189,36 @@ public class Sock : MonoBehaviour
             // not my car
             does_vehicle_exist(macAddr);
 
-            while(mac_vehicle_mapper.ContainsKey(macAddr) == false || locked == true);
+            while (mac_vehicle_mapper.ContainsKey(macAddr) == false || locked == true) ;
             // mac_vehicle_mapper[macAddr].GetComponent<Vehicle>().update_location(float.Parse(payload.Split(',')[0]), float.Parse(payload.Split(',')[1]));
-            while(mac_vehicle_mapper[macAddr] == null);
+            while (mac_vehicle_mapper[macAddr] == null) ;
 
             mac_vehicle_mapper[macAddr].lat = float.Parse(payload.Split(',')[0]);
             mac_vehicle_mapper[macAddr].lon = float.Parse(payload.Split(',')[1]);
+        }
+    }
+
+    void heading_decoder(string macAddr, string payload)
+    {
+        Debug.Log("heading_decoder started: (" + macAddr + "," + payload + ")");
+        if (macAddr == "000000000000")
+        {
+            // my car
+            my_vechicle.heading = float.Parse(payload);
+        }
+        else if (macAddr == "basebasebase")
+        {
+            tower.base_station_heading = float.Parse(payload);
+        }
+        else
+        {
+            // not my car
+            does_vehicle_exist(macAddr);
+
+            while (mac_vehicle_mapper.ContainsKey(macAddr) == false || locked == true) ;
+            while (mac_vehicle_mapper[macAddr] == null) ;
+
+            mac_vehicle_mapper[macAddr].heading = float.Parse(payload);
         }
     }
 
@@ -202,7 +233,7 @@ public class Sock : MonoBehaviour
         {
             return;
         }
-        
+
         locked = true;
         mac_vehicle_mapper.Add(mac, null);
 

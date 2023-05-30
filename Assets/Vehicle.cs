@@ -8,15 +8,19 @@ public class Vehicle : MonoBehaviour
     public float lat = 0;
     public float lon = 0;
 
-    void update_location(Transform Base){
+    public float heading = 0;
+
+    void update_location(){
         // transform.position.x -= tower.base_station_lon - lon;
         transform.position = new Vector3((lon - tower.base_station_lon) * tower.scale,
                                          transform.position.y,
                                          (lat - tower.base_station_lat) * tower.scale);
+
     }
 
-    public void update_location(float lat, float lon){
-        
+    public void update_heading(){
+        transform.rotation = Quaternion.Euler(0.0f, heading, 0.0f); 
+
     }
 
 
@@ -31,6 +35,7 @@ public class Vehicle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        update_location(tower.transform);
+        update_location();
+        update_heading();
     }
 }

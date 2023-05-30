@@ -8,6 +8,7 @@ public class Base : MonoBehaviour
     // Start is called before the first frame update
     public float base_station_lat = 0;
     public float base_station_lon = 0;
+    public float base_station_heading = 0;
     public float scale = 1;
 
     void Start()
