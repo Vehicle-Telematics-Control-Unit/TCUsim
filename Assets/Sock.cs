@@ -13,7 +13,7 @@ using Cinemachine;
 
 public class Sock : MonoBehaviour
 {
-    public Vehicle myCar;
+    // public Vehicle myCar;
     public GameObject new_car_prefab;
 
     public CinemachineTargetGroup camera_targets;
@@ -81,7 +81,7 @@ public class Sock : MonoBehaviour
     void Start()
     {
 
-        my_vechicle = myCar.GetComponent<Vehicle>();
+        // my_vechicle = myCar.GetComponent<Vehicle>();
 
         Debug.Log("Sock about to start");
         thread = new Thread(sock_main);
@@ -172,14 +172,14 @@ public class Sock : MonoBehaviour
     void location_decoder(string macAddr, string payload)
     {
         Debug.Log("location_decoder started: (" + macAddr + "," + payload + ")");
-        if (macAddr == "000000000000")
-        {
-            // my car
-            // Debug.Log("float parser test:" + float.Parse(payload.Split(',')[0]));
-            my_vechicle.lat = float.Parse(payload.Split(',')[0]);
-            my_vechicle.lon = float.Parse(payload.Split(',')[1]);
-        }
-        else if (macAddr == "basebasebase")
+        // if (macAddr == "000000000000")
+        // {
+        //     // my car
+        //     // Debug.Log("float parser test:" + float.Parse(payload.Split(',')[0]));
+        //     my_vechicle.lat = float.Parse(payload.Split(',')[0]);
+        //     my_vechicle.lon = float.Parse(payload.Split(',')[1]);
+        // }
+        if (macAddr == "basebasebase")
         {
             tower.base_station_lat = float.Parse(payload.Split(',')[0]);
             tower.base_station_lon = float.Parse(payload.Split(',')[1]);
@@ -201,12 +201,12 @@ public class Sock : MonoBehaviour
     void heading_decoder(string macAddr, string payload)
     {
         Debug.Log("heading_decoder started: (" + macAddr + "," + payload + ")");
-        if (macAddr == "000000000000")
-        {
-            // my car
-            my_vechicle.heading = float.Parse(payload);
-        }
-        else if (macAddr == "basebasebase")
+        // if (macAddr == "000000000000")
+        // {
+        //     // my car
+        //     my_vechicle.heading = float.Parse(payload);
+        // }
+        if (macAddr == "basebasebase")
         {
             tower.base_station_heading = float.Parse(payload);
         }

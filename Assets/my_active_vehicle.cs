@@ -25,7 +25,7 @@ public class my_active_vehicle : MonoBehaviour
         //                          transform.position.y,
         //                          (lat - tower.base_station_lat) * tower.scale);
 
-        Base tower = Vehicle.tower;
+        Base tower = Base.tower;
         lat = this.transform.position.x / tower.scale + tower.base_station_lat;
         lon = this.transform.position.z / tower.scale + tower.base_station_lon;
         angle = transform.rotation.eulerAngles.y; 

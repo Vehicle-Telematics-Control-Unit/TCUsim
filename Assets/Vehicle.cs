@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Vehicle : MonoBehaviour
 {
-    public static Base tower = null;
+    public static Base tower;
     public float lat = 0;
     public float lon = 0;
 
@@ -21,6 +21,10 @@ public class Vehicle : MonoBehaviour
     public void update_heading(){
         transform.rotation = Quaternion.Euler(0.0f, heading, 0.0f); 
 
+    }
+
+    void Awake() {   
+        tower = Base.tower;
     }
 
 
