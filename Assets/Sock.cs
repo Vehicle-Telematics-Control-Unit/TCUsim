@@ -40,7 +40,7 @@ public class Sock : MonoBehaviour
                 socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.IP);
 
                 // Define the IPC socket path
-                string socketPath = "sock";
+                string socketPath = "socket/sock";
                 Debug.Log("IPC socket file specified");
 
                 // check file access possibility :)

@@ -8,7 +8,7 @@ public class my_active_vehicle : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public float updateRateSeconds = 1;
+    public float updateRateSeconds = 10;
 
     public float lon = 0, lat = 0, angle = 0;
 
@@ -38,7 +38,11 @@ public class my_active_vehicle : MonoBehaviour
         Debug.Log(socket);
         if (socket != null)
         {
-            string message = lat.ToString() + "," + lon.ToString() + "," + angle.ToString();
+            // sscanf(buffer, "l:%f,%f&&h:%f&&s:%d&&b:%d", lat, lon, heading, speed, brakes);
+            lat = Mathf.Round(lat * 100000) / 100000;
+            lon = Mathf.Round(lon * 100000) / 100000;
+            angle = Mathf.Round(angle * 100000) / 100000;
+            string message = "l:"+ lat.ToString() + "," + lon.ToString() + "&&h:" + angle.ToString() + "&&s:50&&b:0"; // lat.ToString() + "," + lon.ToString() + "," + angle.ToString();
             byte[] data = Encoding.ASCII.GetBytes(message);
             socket.Send(data);
         }

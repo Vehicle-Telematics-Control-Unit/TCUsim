@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <thread>
 
-#define SOCKET_PATH "sock"
+#define SOCKET_PATH "socket/sock"
 
 void read_thread(int clientSocket)
 {
