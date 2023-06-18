@@ -43,6 +43,7 @@ public class my_active_vehicle : MonoBehaviour
             lon = Mathf.Round(lon * 100000) / 100000;
             angle = Mathf.Round(angle * 100000) / 100000;
             string message = "l:"+ lat.ToString() + "," + lon.ToString() + "&&h:" + angle.ToString() + "&&s:50&&b:0"; // lat.ToString() + "," + lon.ToString() + "," + angle.ToString();
+            Debug.Log(message);
             byte[] data = Encoding.ASCII.GetBytes(message);
             socket.Send(data);
         }
