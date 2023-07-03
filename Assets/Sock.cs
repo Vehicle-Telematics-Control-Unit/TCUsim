@@ -29,6 +29,8 @@ public class Sock : MonoBehaviour
 
     Dictionary<string, Vehicle> mac_vehicle_mapper = new Dictionary<string, Vehicle>();
 
+    public CollisionPrediction CollisionPrediction;
+
     void sock_main()
     {
         Debug.Log("Sock inside");
@@ -101,8 +103,8 @@ public class Sock : MonoBehaviour
                 }
                 Debug.Log(string.Format("[{0}] Exiting playmode.", GetType().Name));
             }
-#endif
         };
+#endif
 
     }
 
@@ -115,6 +117,7 @@ public class Sock : MonoBehaviour
             if (entry.Value is null)
             {
                 GameObject go = Instantiate(new_car_prefab, new Vector3(0, 0, 0), Quaternion.identity);
+                CollisionPrediction.GetComponent<CollisionPrediction>().surrounding_vehicles.Add(go.GetComponent<Vehicle>());
                 mac_vehicle_mapper[entry.Key] = go.GetComponent<Vehicle>();
                 camera_targets.AddMember(go.transform, 1, 3.96f);
                 locked = false;
@@ -243,4 +246,4 @@ public class Sock : MonoBehaviour
         // Instantiate(new_car_prefab, new Vector3(0, 0, 0), Quaternion.identity);
     }
 
-}
+} 

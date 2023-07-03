@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Net.Sockets;
 using System.Text;
+using System;
 
 public class my_active_vehicle : MonoBehaviour
 {
@@ -10,8 +11,9 @@ public class my_active_vehicle : MonoBehaviour
 
     public float updateRateSeconds = 10;
 
-    public float lon = 0, lat = 0, angle = 0;
+    public float lon = 0, lat = 0, angle = 0, speed = 0;
 
+    public Rigidbody RB;
 
     void Start()
     {
@@ -29,7 +31,7 @@ public class my_active_vehicle : MonoBehaviour
         lat = this.transform.position.x / tower.scale + tower.base_station_lat;
         lon = this.transform.position.z / tower.scale + tower.base_station_lon;
         angle = transform.rotation.eulerAngles.y; 
-
+        speed = RB.velocity.magnitude;  
     }
 
     void broadcast()
@@ -41,8 +43,8 @@ public class my_active_vehicle : MonoBehaviour
             // sscanf(buffer, "l:%f,%f&&h:%f&&s:%d&&b:%d", lat, lon, heading, speed, brakes);
             lat = Mathf.Round(lat * 100000) / 100000;
             lon = Mathf.Round(lon * 100000) / 100000;
-            angle = Mathf.Round(angle * 100000) / 100000;
-            string message = "l:"+ lat.ToString() + "," + lon.ToString() + "&&h:" + angle.ToString() + "&&s:50&&b:0"; // lat.ToString() + "," + lon.ToString() + "," + angle.ToString();
+            angle = Mathf.Round(angle * 10) / 10;
+            string message = "l:"+ lat.ToString() + "," + lon.ToString() + "&&h:" + (Convert.ToInt16(angle)).ToString() + "&&s:"+ Convert.ToInt32(speed).ToString() +"&&b:0"; // lat.ToString() + "," + lon.ToString() + "," + angle.ToString();
             Debug.Log(message);
             byte[] data = Encoding.ASCII.GetBytes(message);
             socket.Send(data);

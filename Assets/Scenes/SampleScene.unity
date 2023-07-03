@@ -1103,12 +1103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27070355eb757c2d384d0ff9808cc6d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilePrefabs:
-  - {fileID: 2939217583546290560, guid: 007314d8d0cb5a56eb0d774fd688e744, type: 3}
-  playerTransform: {fileID: 1844320231}
-  spawnZ: 0
-  tileLength: 95.39174
-  amnTilesOnScreen: 1
 --- !u!114 &1836049632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1121,14 +1115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1de94533df2c0d2fc88491bb16342088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilePrefabs:
-  - {fileID: 2939217583546290560, guid: 007314d8d0cb5a56eb0d774fd688e744, type: 3}
-  playerTransform: {fileID: 1844320231}
-  spawnX: 0
-  tileLength: 95.39174
-  amnTilesOnScreen: 1
-  InfiniteFloorGeneratorFWD: {fileID: 0}
-  InfiniteFloorGeneratorBKW: {fileID: 0}
 --- !u!114 &1836049633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1141,14 +1127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632a646ab4beb2cb98b8ccd503ac8f05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilePrefabs:
-  - {fileID: 2939217583546290560, guid: 007314d8d0cb5a56eb0d774fd688e744, type: 3}
-  playerTransform: {fileID: 1844320231}
-  spawnZ: 0
-  tileLength: 95.39174
-  amnTilesOnScreen: 1
-  update_pos: {fileID: 0}
-  all_lands: []
 --- !u!1 &1844320223 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2069814030545375925, guid: f7a352f52c0b4034a8e157c2e33e54c4, type: 3}
@@ -1175,6 +1153,13 @@ MonoBehaviour:
   lon: 0
   lat: 0
   angle: 0
+  speed: 0
+  RB: {fileID: 1844320239}
+--- !u!54 &1844320239 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 2069814030545375926, guid: f7a352f52c0b4034a8e157c2e33e54c4, type: 3}
+  m_PrefabInstance: {fileID: 1907187607}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1907187607
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1204,7 +1189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2069814030545375923, guid: f7a352f52c0b4034a8e157c2e33e54c4, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2069814030545375925, guid: f7a352f52c0b4034a8e157c2e33e54c4, type: 3}
       propertyPath: m_Name
