@@ -12,6 +12,7 @@ public class my_active_vehicle : MonoBehaviour
     public float updateRateSeconds = 10;
 
     public float lon = 0, lat = 0, angle = 0, speed = 0;
+    public Vector3 velocity;
 
     public Rigidbody RB;
 
@@ -31,7 +32,8 @@ public class my_active_vehicle : MonoBehaviour
         lat = this.transform.position.x / tower.scale + tower.base_station_lat;
         lon = this.transform.position.z / tower.scale + tower.base_station_lon;
         angle = transform.rotation.eulerAngles.y; 
-        speed = RB.velocity.magnitude;  
+        speed = RB.velocity.magnitude;
+        velocity = RB.velocity;
     }
 
     void broadcast()

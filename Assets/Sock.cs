@@ -29,7 +29,7 @@ public class Sock : MonoBehaviour
 
     Dictionary<string, Vehicle> mac_vehicle_mapper = new Dictionary<string, Vehicle>();
 
-    public CollisionPrediction CollisionPrediction;
+    // public CollisionPrediction CollisionPrediction;
 
     void sock_main()
     {
@@ -113,12 +113,12 @@ public class Sock : MonoBehaviour
         foreach (KeyValuePair<string, Vehicle> entry in mac_vehicle_mapper)
         {
             // do something with entry.Value or entry.Key
-            Debug.Log("entry #> " + entry.Key + " : " + entry.Value);
+            // Debug.Log("entry #> " + entry.Key + " : " + entry.Value);
             if (entry.Value is null)
             {
                 GameObject go = Instantiate(new_car_prefab, new Vector3(0, 0, 0), Quaternion.identity);
-                CollisionPrediction.GetComponent<CollisionPrediction>().surrounding_vehicles.Add(go.GetComponent<Vehicle>());
                 mac_vehicle_mapper[entry.Key] = go.GetComponent<Vehicle>();
+                // CollisionPrediction.GetComponent<CollisionPrediction>().surrounding_vehicles.Add(go.GetComponent<Vehicle>());
                 camera_targets.AddMember(go.transform, 1, 3.96f);
                 locked = false;
                 break;
@@ -165,6 +165,10 @@ public class Sock : MonoBehaviour
 
             case 'h':
                 heading_decoder(macAddr, payload);
+                break;
+
+            case 's':
+                speed_decoder(macAddr, payload);
                 break;
 
             default:
@@ -225,6 +229,17 @@ public class Sock : MonoBehaviour
         }
     }
 
+    void speed_decoder(string macAddr, string payload)
+    {
+
+        does_vehicle_exist(macAddr);
+
+        while (mac_vehicle_mapper.ContainsKey(macAddr) == false || locked == true) ;
+        while (mac_vehicle_mapper[macAddr] == null) ;
+
+        mac_vehicle_mapper[macAddr].speed = int.Parse(payload);
+    }
+
     void does_vehicle_exist(string mac)
     {
         // if (mac_vehchile_mapper.ContainsKey(mac) == true)
@@ -246,4 +261,4 @@ public class Sock : MonoBehaviour
         // Instantiate(new_car_prefab, new Vector3(0, 0, 0), Quaternion.identity);
     }
 
-} 
+}
