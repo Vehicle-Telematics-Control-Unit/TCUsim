@@ -654,7 +654,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.5510258, y: -0.000000039607954, z: 0.000000026153756, w: 0.8344883}
+  m_LocalRotation: {x: 0.55102575, y: 0.00000008364925, z: -0.000000055234914, w: 0.8344883}
   m_LocalPosition: {x: 0, y: 37.7, z: -16.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -959,7 +959,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a09ae89cad38b13a896f8985d2827d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  new_car_prefab: {fileID: 8113931262244546811, guid: 6dd708912de5c098fb153dbafdfc7aa7, type: 3}
+  new_car_prefab: {fileID: 8788646896759598737, guid: 1b4b26a0e8f1092ef8de753c2d4a0f78, type: 3}
   camera_targets: {fileID: 965593591}
   tower: {fileID: 950048913}
 --- !u!4 &1245334155
@@ -1149,11 +1149,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c422031b3aee73bddb0378227701758d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updateRateSeconds: 1
+  updateRateSeconds: 0.4
   lon: 0
   lat: 0
   angle: 0
   speed: 0
+  velocity: {x: 0, y: 0, z: 0}
   RB: {fileID: 1844320239}
 --- !u!54 &1844320239 stripped
 Rigidbody:
@@ -1189,7 +1190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2069814030545375923, guid: f7a352f52c0b4034a8e157c2e33e54c4, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2069814030545375925, guid: f7a352f52c0b4034a8e157c2e33e54c4, type: 3}
       propertyPath: m_Name
@@ -1394,7 +1395,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956023908}
-  m_LocalRotation: {x: 0.5510258, y: -0.000000039607954, z: 0.000000026153756, w: 0.8344883}
+  m_LocalRotation: {x: 0.55102575, y: 0.00000008364925, z: -0.000000055234914, w: 0.8344883}
   m_LocalPosition: {x: 0, y: 37.7, z: -16.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
