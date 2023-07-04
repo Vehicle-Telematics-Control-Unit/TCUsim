@@ -5,22 +5,22 @@ using UnityEngine;
 public class Vehicle : MonoBehaviour
 {
     public static Base tower;
-    public float lat = 0;
-    public float lon = 0;
+    public float x = 0;
+    public float z = 0;
 
-    public float heading = 0;
+    public float angle = 0;
     public int speed = 0;
 
     void update_location(){
         // transform.position.x -= tower.base_station_lon - lon;
-        transform.position = new Vector3((lon - tower.base_station_lon) * tower.scale,
+        transform.position = new Vector3((z - tower.base_station_lon) * tower.scale,
                                          transform.position.y,
-                                         (lat - tower.base_station_lat) * tower.scale);
+                                         (x - tower.base_station_lat) * tower.scale);
 
     }
 
     public void update_heading(){
-        transform.rotation = Quaternion.Euler(0.0f, heading, 0.0f); 
+        transform.rotation = Quaternion.Euler(0.0f, angle, 0.0f); 
 
     }
 

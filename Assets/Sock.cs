@@ -29,7 +29,7 @@ public class Sock : MonoBehaviour
 
     Dictionary<string, Vehicle> mac_vehicle_mapper = new Dictionary<string, Vehicle>();
 
-    // public CollisionPrediction CollisionPrediction;
+    public CollisionPrediction CollisionPrediction;
 
     void sock_main()
     {
@@ -118,9 +118,9 @@ public class Sock : MonoBehaviour
             {
                 GameObject go = Instantiate(new_car_prefab, new Vector3(0, 0, 0), Quaternion.identity);
                 mac_vehicle_mapper[entry.Key] = go.GetComponent<Vehicle>();
-                // CollisionPrediction.GetComponent<CollisionPrediction>().surrounding_vehicles.Add(go.GetComponent<Vehicle>());
                 camera_targets.AddMember(go.transform, 1, 7.26f);
                 locked = false;
+                CollisionPrediction.GetComponent<CollisionPrediction>().surrounding_vehicles.Add(go.GetComponent<Vehicle>());
                 break;
             }
         }
@@ -200,8 +200,8 @@ public class Sock : MonoBehaviour
             // mac_vehicle_mapper[macAddr].GetComponent<Vehicle>().update_location(float.Parse(payload.Split(',')[0]), float.Parse(payload.Split(',')[1]));
             while (mac_vehicle_mapper[macAddr] == null) ;
 
-            mac_vehicle_mapper[macAddr].lat = float.Parse(payload.Split(',')[1]);
-            mac_vehicle_mapper[macAddr].lon = float.Parse(payload.Split(',')[0]);
+            mac_vehicle_mapper[macAddr].x = float.Parse(payload.Split(',')[1]);
+            mac_vehicle_mapper[macAddr].z = float.Parse(payload.Split(',')[0]);
         }
     }
 
@@ -225,7 +225,7 @@ public class Sock : MonoBehaviour
             while (mac_vehicle_mapper.ContainsKey(macAddr) == false || locked == true) ;
             while (mac_vehicle_mapper[macAddr] == null) ;
 
-            mac_vehicle_mapper[macAddr].heading = float.Parse(payload);
+            mac_vehicle_mapper[macAddr].angle = float.Parse(payload);
         }
     }
 
