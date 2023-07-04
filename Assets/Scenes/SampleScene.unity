@@ -629,7 +629,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 12.839402
+  field of view: 24.964981
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -654,7 +654,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.55102575, y: 0.00000008364925, z: -0.000000055234914, w: 0.8344883}
+  m_LocalRotation: {x: 0.55102575, y: -0.0000000071605357, z: 0.000000004728215, w: 0.8344883}
   m_LocalPosition: {x: 0, y: 37.7, z: -16.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -731,7 +731,7 @@ MonoBehaviour:
   m_Targets:
   - target: {fileID: 1844320231}
     weight: 1
-    radius: 3.69
+    radius: 7.26
 --- !u!4 &965593592
 Transform:
   m_ObjectHideFlags: 0
@@ -1188,6 +1188,26 @@ PrefabInstance:
       propertyPath: brakeOnThrottleBackwards
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2069814030545375922, guid: f7a352f52c0b4034a8e157c2e33e54c4, type: 3}
+      propertyPath: steeringAids.limitMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2069814030545375922, guid: f7a352f52c0b4034a8e157c2e33e54c4, type: 3}
+      propertyPath: speedControl.speedLimit
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2069814030545375922, guid: f7a352f52c0b4034a8e157c2e33e54c4, type: 3}
+      propertyPath: steeringAids.limitRatio
+      value: 0.847
+      objectReference: {fileID: 0}
+    - target: {fileID: 2069814030545375922, guid: f7a352f52c0b4034a8e157c2e33e54c4, type: 3}
+      propertyPath: speedControl.speedLimiter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2069814030545375922, guid: f7a352f52c0b4034a8e157c2e33e54c4, type: 3}
+      propertyPath: steeringAids.limitProportionality
+      value: 0.882
+      objectReference: {fileID: 0}
     - target: {fileID: 2069814030545375923, guid: f7a352f52c0b4034a8e157c2e33e54c4, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1395,7 +1415,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956023908}
-  m_LocalRotation: {x: 0.55102575, y: 0.00000008364925, z: -0.000000055234914, w: 0.8344883}
+  m_LocalRotation: {x: 0.55102575, y: -0.0000000071605357, z: 0.000000004728215, w: 0.8344883}
   m_LocalPosition: {x: 0, y: 37.7, z: -16.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

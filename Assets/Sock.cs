@@ -119,7 +119,7 @@ public class Sock : MonoBehaviour
                 GameObject go = Instantiate(new_car_prefab, new Vector3(0, 0, 0), Quaternion.identity);
                 mac_vehicle_mapper[entry.Key] = go.GetComponent<Vehicle>();
                 // CollisionPrediction.GetComponent<CollisionPrediction>().surrounding_vehicles.Add(go.GetComponent<Vehicle>());
-                camera_targets.AddMember(go.transform, 1, 3.96f);
+                camera_targets.AddMember(go.transform, 1, 7.26f);
                 locked = false;
                 break;
             }
