@@ -31,7 +31,7 @@ public class my_active_vehicle : MonoBehaviour
         Base tower = Base.tower;
         z = this.transform.position.x / tower.scale + tower.base_station_lat;
         x = this.transform.position.z / tower.scale + tower.base_station_lon;
-        angle = transform.rotation.eulerAngles.y; 
+        angle = transform.rotation.eulerAngles.y;
         speed = RB.velocity.magnitude;
         velocity = RB.velocity;
     }
@@ -45,11 +45,19 @@ public class my_active_vehicle : MonoBehaviour
             // sscanf(buffer, "l:%f,%f&&h:%f&&s:%d&&b:%d", lat, lon, heading, speed, brakes);
             z = Mathf.Round(z * 100000) / 100000;
             x = Mathf.Round(x * 100000) / 100000;
+            speed = Mathf.Round(speed * 100000) / 100000;
             angle = Mathf.Round(angle * 10) / 10;
-            string message = "l:"+ z.ToString() + "," + x.ToString() + "&&h:" + (Convert.ToInt16(angle)).ToString() + "&&s:"+ Convert.ToInt32(speed).ToString() +"&&b:0"; // lat.ToString() + "," + lon.ToString() + "," + angle.ToString();
+            string message = "l:" + z.ToString() + "," + x.ToString() + "&&h:" + (Convert.ToInt16(angle)).ToString() + "&&s:" + speed + "&&b:0"; // lat.ToString() + "," + lon.ToString() + "," + angle.ToString();
             Debug.Log(message);
             byte[] data = Encoding.ASCII.GetBytes(message);
-            socket.Send(data);
+            try
+            {
+                socket.Send(data);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
         }
         Invoke("broadcast", updateRateSeconds);
     }

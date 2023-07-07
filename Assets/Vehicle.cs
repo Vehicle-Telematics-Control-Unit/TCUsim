@@ -9,7 +9,7 @@ public class Vehicle : MonoBehaviour
     public float z = 0;
 
     public float angle = 0;
-    public int speed = 0;
+    public float speed = 0;
 
     void update_location(){
         // transform.position.x -= tower.base_station_lon - lon;

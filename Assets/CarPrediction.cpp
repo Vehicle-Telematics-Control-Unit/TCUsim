@@ -132,8 +132,8 @@ bool CarPrediction::isWarn()
             float c1=v.x-m1*v.z;
             float xIntersect=(c1-c)/(m-m1);
             float yIntersect=m*xIntersect+c;
-            if ()
-            }
+            // if ()
+            // }
            }
         }
     }
