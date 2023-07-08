@@ -75,14 +75,6 @@ public class CollisionPrediction : MonoBehaviour
                 }
             }
 
-            if (time2Collide <= time_threshold)
-            {
-                Debug.Log("Collision @ " + time2Collide.ToString());
-                Capsule.material.color = new Color(1,0,0);
-            }
-            else{
-                Capsule.material.color = new Color(0,0,0);
-            }
 
             // else
             // {
@@ -119,6 +111,16 @@ public class CollisionPrediction : MonoBehaviour
             //         }
             //     }
             // }
+
+            
+            if (time2Collide <= time_threshold)
+            {
+                Debug.Log("Collision @ " + time2Collide.ToString());
+                Capsule.material.color = new Color(1,0,0);
+            }
+            else{
+                Capsule.material.color = new Color(0,0,0);
+            }
         }
 
     }
