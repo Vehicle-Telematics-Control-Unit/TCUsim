@@ -200,8 +200,8 @@ public class Sock : MonoBehaviour
             // mac_vehicle_mapper[macAddr].GetComponent<Vehicle>().update_location(float.Parse(payload.Split(',')[0]), float.Parse(payload.Split(',')[1]));
             while (mac_vehicle_mapper[macAddr] == null) ;
 
-            mac_vehicle_mapper[macAddr].x = float.Parse(payload.Split(',')[1]);
-            mac_vehicle_mapper[macAddr].z = float.Parse(payload.Split(',')[0]);
+            mac_vehicle_mapper[macAddr].x = float.Parse(payload.Split(',')[0]);
+            mac_vehicle_mapper[macAddr].z = float.Parse(payload.Split(',')[1]);
         }
     }
 

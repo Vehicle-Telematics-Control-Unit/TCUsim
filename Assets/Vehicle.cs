@@ -13,9 +13,9 @@ public class Vehicle : MonoBehaviour
 
     void update_location(){
         // transform.position.x -= tower.base_station_lon - lon;
-        transform.position = new Vector3((z - tower.base_station_lon) * tower.scale,
+        transform.position = new Vector3((x - tower.base_station_lat) * tower.scale,
                                          transform.position.y,
-                                         (x - tower.base_station_lat) * tower.scale);
+                                         (z - tower.base_station_lon) * tower.scale);
 
     }
 
