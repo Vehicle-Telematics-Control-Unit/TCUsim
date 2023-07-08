@@ -218,18 +218,14 @@ bool CarPrediction::isWarn()
                 float extra_distance;
                 float distance_my_vehicle=sqrt(pow(my_vehicle.x-xIntersect,2)+pow(my_vehicle.z-zIntersect,2));
                 float time;
-                if (distance_v > RADIUS*2)
-                    continue;
-                else
+                if (distance_v <= RADIUS*2)
                 {
-                    time=distance_my_vehicle/my_vehicle.speed;
-                    time2Collide_my_vehicle_max=time+time4radius_my_vehicle;
-                    time2Collide_my_vehicle_min=time-time4radius_my_vehicle;
-                    extra_distance=v.speed*time;
-                    if (distance_v+extra_distance>RADIUS*2)
-                        continue;
-                    else
-                        time2Collide=time2Collide_my_vehicle_min;
+                time=distance_my_vehicle/my_vehicle.speed;
+                time2Collide_my_vehicle_max=time+time4radius_my_vehicle;
+                time2Collide_my_vehicle_min=time-time4radius_my_vehicle;
+                extra_distance=v.speed*time;
+                if (distance_v+extra_distance <= RADIUS*2)
+                    time2Collide=time2Collide_my_vehicle_min;
                 }
             }
             else if (m_in_range == false && m1_in_range == true)
@@ -239,18 +235,14 @@ bool CarPrediction::isWarn()
                 float extra_distance;
                 float distance_my_vehicle=sqrt(pow(my_vehicle.x-xIntersect,2)+pow(my_vehicle.z-zIntersect,2));
                 float time;
-                if (distance_my_vehicle > RADIUS*2)
-                    continue;
-                else
+                if (distance_my_vehicle <= RADIUS*2)
                 {
-                    time=distance_v/v.speed;
-                    time2Collide_v_max=time+time4radius_v;
-                    time2Collide_v_min=time-time4radius_v;
-                    extra_distance=my_vehicle.speed*time;
-                    if (distance_my_vehicle+extra_distance>RADIUS*2)
-                        continue;
-                    else
-                        time2Collide=time2Collide_v_min;
+                time=distance_v/v.speed;
+                time2Collide_v_max=time+time4radius_v;
+                time2Collide_v_min=time-time4radius_v;
+                extra_distance=my_vehicle.speed*time;
+                if (distance_my_vehicle+extra_distance <= RADIUS*2)
+                    time2Collide=time2Collide_v_min;
                 }
             }
            }
