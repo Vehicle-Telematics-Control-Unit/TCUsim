@@ -29,8 +29,8 @@ public class my_active_vehicle : MonoBehaviour
         //                          (lat - tower.base_station_lat) * tower.scale);
 
         Base tower = Base.tower;
-        z = this.transform.position.x / tower.scale + tower.base_station_lat;
-        x = this.transform.position.z / tower.scale + tower.base_station_lon;
+        x = this.transform.position.x / tower.scale + tower.base_station_lat;
+        z = this.transform.position.z / tower.scale + tower.base_station_lon;
         angle = transform.rotation.eulerAngles.y;
         speed = RB.velocity.magnitude;
         velocity = RB.velocity;
@@ -47,7 +47,7 @@ public class my_active_vehicle : MonoBehaviour
             x = Mathf.Round(x * 100000) / 100000;
             speed = Mathf.Round(speed * 100000) / 100000;
             angle = Mathf.Round(angle * 10) / 10;
-            string message = "l:" + z.ToString() + "," + x.ToString() + "&&h:" + (Convert.ToInt16(angle)).ToString() + "&&s:" + speed + "&&b:0"; // lat.ToString() + "," + lon.ToString() + "," + angle.ToString();
+            string message = "l:" + x.ToString() + "," + z.ToString() + "&&h:" + (Convert.ToInt16(angle)).ToString() + "&&s:" + speed + "&&b:0"; // lat.ToString() + "," + lon.ToString() + "," + angle.ToString();
             Debug.Log(message);
             byte[] data = Encoding.ASCII.GetBytes(message);
             try

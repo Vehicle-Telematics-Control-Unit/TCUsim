@@ -49,8 +49,8 @@ public class CollisionPrediction : MonoBehaviour
             string positionX = (Mathf.Round((my_vehicle.transform.position.x - V.transform.position.x) * 100000) / 100000).ToString();
             string positionZ = (Mathf.Round((my_vehicle.transform.position.z - V.transform.position.z) * 100000) / 100000).ToString();
 
-            string angleM = (Mathf.Round((360f - my_vehicle.GetComponent<my_active_vehicle>().angle) * Mathf.Deg2Rad * 100000) / 100000).ToString();
-            string angleV = (Mathf.Round((360f - V.GetComponent<Vehicle>().angle) * Mathf.Deg2Rad * 100000) / 100000).ToString();
+            string angleM = (Mathf.Round((360f - my_vehicle.GetComponent<my_active_vehicle>().angle + 90f) * Mathf.Deg2Rad * 10) / 10).ToString();
+            string angleV = (Mathf.Round((360f - V.GetComponent<Vehicle>().angle + 90f) * Mathf.Deg2Rad * 100000) / 100000).ToString();
             string speedM = (Mathf.Round(my_vehicle.GetComponent<my_active_vehicle>().speed * 100000)/100000).ToString();
             string speedV = (Mathf.Round(V.GetComponent<Vehicle>().speed * 100000)/100000).ToString();
 
@@ -91,6 +91,7 @@ public class CollisionPrediction : MonoBehaviour
         stream.Close();
         client.Close();
     }
+
 
 
 
