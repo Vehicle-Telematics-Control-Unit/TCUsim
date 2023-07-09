@@ -37,48 +37,49 @@ public class CollisionPrediction : MonoBehaviour
                 Debug.Log("Collision :: touching each other");
                 break;
             }
-            else if (Math.Abs(v.angle - my_vehicle.angle) == 180 || Math.Abs(v.angle - my_vehicle.angle) == 0)
+            else if (Math.Abs(Math.Round(v.angle) - Math.Round(my_vehicle.angle)) == 180 || Math.Abs(Math.Round(v.angle) - Math.Round(my_vehicle.angle)) == 0)
             {
                 Debug.Log("Collision :: Lines are parallel");
 
-                if ((my_vehicle.angle == 90 || my_vehicle.angle == 270) && (v.angle == 90 || v.angle == 270))
+                if ((Math.Round(my_vehicle.angle) == 90 || Math.Round(my_vehicle.angle) == 270) && (Math.Round(v.angle) == 90 || Math.Round(v.angle) == 270))
                 {
                     Debug.Log("Collision :: Angle = 90 or 270");
                     if (Math.Abs(my_vehicle.z - v.z) > RADIUS * 2
-                        || ((my_vehicle.angle == 270 && v.angle == 90 && v.x > my_vehicle.x)
-                        || (my_vehicle.angle == 90 && v.angle == 270 && v.x < my_vehicle.x)
+                        || ((Math.Round(my_vehicle.angle) == 270 && Math.Round(v.angle) == 90 && v.x > my_vehicle.x)
+                        || (Math.Round(my_vehicle.angle) == 90 && Math.Round(v.angle) == 270 && v.x < my_vehicle.x)
                         || (my_vehicle.speed == 0 && v.speed == 0)
-                        || (my_vehicle.angle == v.angle && my_vehicle.speed == v.speed)
-                        || (my_vehicle.angle == v.angle && my_vehicle.speed > v.speed && my_vehicle.x > v.x)
-                        || (my_vehicle.angle == v.angle && my_vehicle.speed < v.speed && my_vehicle.x < v.x)
+                        || (Math.Round(my_vehicle.angle) == Math.Round(v.angle) && my_vehicle.speed == v.speed)
+                        || (Math.Round(my_vehicle.angle) == Math.Round(v.angle) && my_vehicle.speed > v.speed && my_vehicle.x > v.x)
+                        || (Math.Round(my_vehicle.angle) == Math.Round(v.angle) && my_vehicle.speed < v.speed && my_vehicle.x < v.x)
                         && Math.Abs(my_vehicle.x - v.x) > RADIUS * 2))
                     {
                         Debug.Log("Collision :: Angle = 90 or 270 but no collision");
-                        continue;
+                        continue;   
                     }
                 }
                 else
                 {
                     Debug.Log("Collision :: Angle != 90 nor 270");
-                    float m = (float)Math.Tan(Mathf.Deg2Rad * my_vehicle.angle);
+                    float m = (float)Math.Tan(Mathf.Deg2Rad * Math.Round(my_vehicle.angle));
                     float c = my_vehicle.x - m * my_vehicle.z;
                     float d = (float)Math.Abs((m * v.z - v.x + c) / Math.Sqrt(m * m + 1));
+                    Debug.Log("Collision :: "+(bool)(((Math.Round(my_vehicle.angle) >= 0 && Math.Round(my_vehicle.angle) < 90 && Math.Round(v.angle) > 180 && Math.Round(v.angle) < 270) || (Math.Round(my_vehicle.angle) > 90 && Math.Round(my_vehicle.angle) <= 180 && Math.Round(v.angle) > 270 && Math.Round(v.angle) < 360)) && v.z < my_vehicle.z));
                     // Debug.Log("Collision :: D="+d.ToString());
                     if (d > RADIUS * 2
-                        || (((my_vehicle.angle > 180 && my_vehicle.angle < 270 && v.angle >= 0 && v.angle < 90) || (my_vehicle.angle > 270 && my_vehicle.angle < 360 && v.angle > 90 && v.angle <= 180)) && v.z > my_vehicle.z)
-                        || (((my_vehicle.angle >= 0 && my_vehicle.angle < 90 && v.angle > 180 && v.angle < 270) || (my_vehicle.angle > 90 && my_vehicle.angle <= 180 && v.angle > 270 && v.angle < 360)) && v.z < my_vehicle.z)
+                        || (((Math.Round(my_vehicle.angle) > 180 && Math.Round(my_vehicle.angle) < 270 && Math.Round(v.angle) >= 0 && Math.Round(v.angle) < 90) || (Math.Round(my_vehicle.angle) > 90 && Math.Round(my_vehicle.angle) <= 180 && Math.Round(v.angle) > 270 && Math.Round(v.angle) < 360)) && v.z > my_vehicle.z)
+                        || (((Math.Round(my_vehicle.angle) >= 0 && Math.Round(my_vehicle.angle) < 90 && Math.Round(v.angle) > 180 && Math.Round(v.angle) < 270) || (Math.Round(my_vehicle.angle) > 270 && Math.Round(my_vehicle.angle) < 360 && Math.Round(v.angle) > 90 && Math.Round(v.angle) <= 180)) && v.z < my_vehicle.z)
                         || (my_vehicle.speed == 0 && v.speed == 0)
-                        || ((my_vehicle.speed == v.speed
-                        || ((my_vehicle.angle >= 0 && my_vehicle.angle < 90) || (my_vehicle.angle > 270 && my_vehicle.angle < 360) && my_vehicle.speed > v.speed && my_vehicle.z > v.z)
-                        || ((my_vehicle.angle >= 0 && my_vehicle.angle < 90) || (my_vehicle.angle > 270 && my_vehicle.angle < 360) && my_vehicle.speed < v.speed && my_vehicle.z < v.z)
-                        || ((my_vehicle.angle > 180 && my_vehicle.angle < 270) || (my_vehicle.angle > 90 && my_vehicle.angle <= 180) && my_vehicle.speed > v.speed && my_vehicle.z < v.z)
-                        || ((my_vehicle.angle > 180 && my_vehicle.angle < 270) || (my_vehicle.angle > 90 && my_vehicle.angle <= 180) && my_vehicle.speed < v.speed && my_vehicle.z > v.z))) && my_vehicle.angle == v.angle)
+                        || (((my_vehicle.speed == v.speed
+                        || (((Math.Round(my_vehicle.angle) >= 0 && Math.Round(my_vehicle.angle) < 90) || (Math.Round(my_vehicle.angle) > 270 && Math.Round(my_vehicle.angle) < 360)) && my_vehicle.speed > v.speed && my_vehicle.z > v.z)
+                        || (((Math.Round(my_vehicle.angle) >= 0 && Math.Round(my_vehicle.angle) < 90) || (Math.Round(my_vehicle.angle) > 270 && Math.Round(my_vehicle.angle) < 360)) && my_vehicle.speed < v.speed && my_vehicle.z < v.z)
+                        || (((Math.Round(my_vehicle.angle) > 180 && Math.Round(my_vehicle.angle) < 270) || (Math.Round(my_vehicle.angle) > 90 && Math.Round(my_vehicle.angle) <= 180)) && my_vehicle.speed > v.speed && my_vehicle.z < v.z)
+                        || (((Math.Round(my_vehicle.angle) > 180 && Math.Round(my_vehicle.angle) < 270) || (Math.Round(my_vehicle.angle) > 90 && Math.Round(my_vehicle.angle) <= 180)) && my_vehicle.speed < v.speed && my_vehicle.z > v.z))) && Math.Round(my_vehicle.angle) == Math.Round(v.angle)))
                     {
                         Debug.Log("Collision :: Angle != 90 nor 270 and no collision");
                         continue;
                     }
                 }
-                if (my_vehicle.angle == v.angle)
+                if (Math.Round(my_vehicle.angle) == Math.Round(v.angle))
                 {
                     time2Collide = (float)(Math.Abs(Math.Sqrt(Math.Pow(my_vehicle.x - v.x, 2) + Math.Pow(my_vehicle.z - v.z, 2)) - RADIUS * 2) / Math.Abs(my_vehicle.speed - v.speed));
                     Debug.Log("Collision :: Calculating AngleV = AngleM");
