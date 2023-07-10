@@ -45,7 +45,10 @@ public class my_active_vehicle : MonoBehaviour
         x = this.transform.position.x / tower.scale + tower.base_station_lat;
         z = this.transform.position.z / tower.scale + tower.base_station_lon;
         angle = transform.rotation.eulerAngles.y;
-        speed = RB.velocity.magnitude;
+
+
+        speed = Mathf.Round(RB.velocity.magnitude * 1000) / 1000;
+        // speed = RB.velocity.magnitude;
         velocity = RB.velocity;
 
         z = Mathf.Round(z * 100000) / 100000;
