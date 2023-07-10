@@ -181,7 +181,7 @@ public class CollisionPrediction : MonoBehaviour
                             m1 = Mathf.Tan(v.angle);
                             c1 = v.x - m1 * v.z;
                             xIntersect = m1 * zIntersect + c1;
-                            // Debug.Log("Collision :: xIntersect = "+xIntersect.ToString());
+                            Debug.Log("Collision :: xIntersect = "+xIntersect.ToString());
                             // Debug.Log("Collision :: m.x = "+my_vehicle.x.ToString());
                             if ((xIntersect > my_vehicle.x && my_vehicle.angle == 270)
                                 || (xIntersect < my_vehicle.x && my_vehicle.angle == 90))
