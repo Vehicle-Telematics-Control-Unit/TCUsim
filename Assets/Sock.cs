@@ -185,7 +185,7 @@ public class Sock : MonoBehaviour
             tower.base_station_lat = float.Parse(payload.Split(',')[0]);
             tower.base_station_lon = float.Parse(payload.Split(',')[1]);
             first_time_location = false;
-            tower.scale = 1000;
+            tower.scale = 111139;
         }
         else
         {
