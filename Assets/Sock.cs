@@ -176,20 +176,16 @@ public class Sock : MonoBehaviour
         }
     }
 
+    bool first_time_location = true;
     void location_decoder(string macAddr, string payload)
     {
         Debug.Log("location_decoder started: (" + macAddr + "," + payload + ")");
-        // if (macAddr == "000000000000")
-        // {
-        //     // my car
-        //     // Debug.Log("float parser test:" + float.Parse(payload.Split(',')[0]));
-        //     my_vechicle.lat = float.Parse(payload.Split(',')[0]);
-        //     my_vechicle.lon = float.Parse(payload.Split(',')[1]);
-        // }
-        if (macAddr == "basebasebase")
+        if (macAddr == "basebasebase" || first_time_location)
         {
             tower.base_station_lat = float.Parse(payload.Split(',')[0]);
             tower.base_station_lon = float.Parse(payload.Split(',')[1]);
+            first_time_location = false;
+            tower.scale = 1000;
         }
         else
         {
